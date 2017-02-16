@@ -36,8 +36,8 @@ extern "C" {
 #include <stdio.h> /* sscanf */
 #include <ctype.h> /* isdigit */
 //#include <stddef.h> /* size_t */
-#include "aw-base64.h"
-#include "aw-sha1.h"
+#include "mbedtls/sha1.h"
+#include "mbedtls/base64.h"
 #ifdef __AVR__
     #include <avr/pgmspace.h>
 #else

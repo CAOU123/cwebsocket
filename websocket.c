@@ -99,7 +99,7 @@ enum wsFrameType wsParseHandshake(const uint8_t *inputFrame, size_t inputLength,
         parse next lines
      */
     #define prepare(x) do {if (x) { free(x); x = NULL; }} while(0)
-    #define strtolower(x) do { int i; for (i = 0; x[i]; i++) x[i] = tolower(x[i]); } while(0)
+    #define strtolower(x) do { int i; for (i = 0; (unsigned char)x[i]; i++) x[i] = tolower((unsigned char)x[i]); } while(0)
     uint8_t connectionFlag = FALSE;
     uint8_t upgradeFlag = FALSE;
     uint8_t subprotocolFlag = FALSE;
@@ -182,8 +182,10 @@ void wsGetHandshakeAnswer(const struct handshake *hs, uint8_t *outFrame,
     memcpy_P(&(responseKey[strlen(hs->key)]), secret, strlen_P(secret));
     unsigned char shaHash[20];
     memset(shaHash, 0, sizeof(shaHash));
-    sha1(shaHash, responseKey, length);
-    size_t base64Length = base64(responseKey, length, shaHash, 20);
+    mbedtls_sha1((unsigned char*)responseKey, length, shaHash);
+    size_t base64Length = 0;
+    mbedtls_base64_encode((unsigned char*)responseKey, length, &base64Length, shaHash, 20);
+
     responseKey[base64Length] = '\0';
     
     int written = sprintf_P((char *)outFrame,

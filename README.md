@@ -1,5 +1,8 @@
+WIP Wrapper coming soon!
+
 ## Overview
 cWebsocket is lightweight websocket server library written in C. This library include functions for easy creating websocket server. It implements [websocket protocol rfc6455](http://tools.ietf.org/html/rfc6455).
+This is a fork of the project [here](https://github.com/m8rge/cwebsocket) using ESP32 hardware cryptography.
 
 ## Features
 Pure C.  
@@ -8,8 +11,9 @@ It very easy to embed in any your application at any platform.
 Library design was made with microcontrollers architecture in mind.  
 MIT Licensed.
 
-## Microcontrollers
-With this library you can turn your Arduino to websocket server and get realtime properties from your microcontroller only with browser!
+## ESP32
+With this library you can turn your ESP32 to websocket server and get realtime properties from your microcontroller only with browser!
+Uses hardware cryptography from ESP32 for SHA1 and Base64, no software crypto needed!
 
 ## Notes
 ### Not supported
