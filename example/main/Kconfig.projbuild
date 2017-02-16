@@ -1,0 +1,15 @@
+menu "Example Configuration"
+
+config WIFI_SSID
+    string "WiFi SSID"
+    default "wpa2_test"
+    help
+        SSID (network name) for the example to connect to.
+
+config WIFI_PASS
+    string "WiFi Password"
+    default "wpa2_test"
+    help
+        Password of network for the example to connect to.        
+
+endmenu
