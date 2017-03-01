@@ -13,8 +13,8 @@ MIT Licensed.
 
 ## ESP32
 With this library you can turn your ESP32 to websocket server and get realtime properties from your microcontroller only with browser!  
-Uses hardware cryptography from ESP32 for SHA1 and Base64, no software crypto needed!
-The server wrapper uses a total of three FreeRTOS tasks for any number of sockets (default 5 max). Can handle messages 0.2 ms apart.
+Uses hardware cryptography from ESP32 for SHA1 and Base64, no software crypto needed!  
+The server wrapper uses a total of three FreeRTOS tasks for any number of sockets (default 5 max). Can handle messages 0.2 ms apart.  
 
 ## Notes
 ### Not supported
