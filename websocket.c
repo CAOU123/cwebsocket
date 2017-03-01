@@ -307,7 +307,10 @@ enum wsFrameType wsParseInputFrame(uint8_t *inputFrame, size_t inputLength,
                 return WS_INCOMPLETE_FRAME;
             uint8_t *maskingKey = &inputFrame[2 + payloadFieldExtraBytes];
 
-            assert(payloadLength == inputLength - 6 - payloadFieldExtraBytes);
+            if(payloadLength != inputLength - 6 - payloadFieldExtraBytes)
+            {
+                return WS_ERROR_FRAME;
+            }
 
             *dataPtr = &inputFrame[2 + payloadFieldExtraBytes + 4];
             *dataLength = payloadLength;

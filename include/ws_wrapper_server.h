@@ -14,6 +14,7 @@
 #include "websocket.h"
 
 #define BUF_LEN 1024 //max: 0xFFFF
+#define MAX_SOCKETS 5
 
 void websocket_init(int port, void *onRecv);
 int websocket_send(int clientSocket, const char *buffer, size_t bufferSize);

@@ -58,6 +58,8 @@ const int CONNECTED_BIT = BIT0;
 
 static const char *TAG = "example";
 
+int counter;
+
 static esp_err_t event_handler(void *ctx, system_event_t *event)
 {
     switch(event->event_id) {
@@ -99,20 +101,20 @@ static void initialize_wifi(void)
 
 void onRecv(const int clientSocket, const char *resource, const char *data, int dataSize, int *returnCode)
 {
-    if (resource == NULL)
-    {
-        return;
-    }
-
     if (data != NULL)
     {
         ESP_LOGI(TAG, "Received data:\n%s", data);
     }
+
     if (strcmp(resource, "/echo") == 0)
     {
         if (data != NULL)
         {
             websocket_send(clientSocket, data, dataSize);
+            
+            /*char* message[20] = {0};
+            sprintf(message, "%f ms", xTaskGetTickCount() / (portTICK_RATE_MS * 1.0));
+            websocket_send(clientSocket, message, strlen(message)+1);*/
         }
     }
     else if (strcmp(resource, "/notecho") == 0)
@@ -136,5 +138,5 @@ void app_main()
 {
     nvs_flash_init();
     initialize_wifi();
-    websocket_init(PORT, &onRecv);  // Warning: This function creates a FreeRTOS task for a listen socket, then tasks for each accepted connection.
+    websocket_init(PORT, &onRecv);  // Warning: This function creates three FreeRTOS tasks.
 }

@@ -28,6 +28,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             var ws;
+            var counter;
 
             $('#connectForm').on('submit', function() {
                 if ("WebSocket" in window) {
@@ -39,6 +40,7 @@
                         $('#disconnect').removeAttr('disabled');
                         $('#message').removeAttr('disabled').focus();
                         $('#send').removeAttr('disabled');
+                        counter = 0;
                     };
 
                     ws.onerror = function() {
@@ -46,7 +48,8 @@
                     };
 
                     ws.onmessage = function(event) {
-                        $('#log').append('<li>recieved: <span class="badge">' + event.data + '</span></li>');
+                        counter++;
+                        $('#log').append('<li>recieved: <span class="badge">' + event.data + ' (' + counter + ')</span></li>');
                     };
 
                     ws.onclose = function() {
@@ -65,7 +68,19 @@
             });
             $('#sendForm').on('submit', function() {
                 var message = $('#message').val();
+                counter = 0;
+                
+                /*for (var i = 0; i < 200; i++)
+                {
+                    ws.send(message);
+                    for (var j = 0; j < 500; j++)
+                    {
+                        console.log(Math.pow(2,20));
+                    }
+                }*/
+                
                 ws.send(message);
+                
                 $('#log').append('<li>sended: <span class="badge">' + message + '</span></li>');
 
                 return false;
